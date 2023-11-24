@@ -1,0 +1,46 @@
+﻿@model TeeamFootballProject.Models.Player
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row rd-2">
+            <h2 class="text-primary">Edit Category</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Surname"></label>
+            <input asp-for="Surname" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Genders>()" class="form-select"></select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DateBirth"></label>
+            <input type="date" asp-for="DateBirth" class="form-control" />
+        </div>
+       @*  <div class="mb-3">
+            <label asp-for="NamesTeamsList"></label>
+            <select asp-for="NamesTeamsList" class="form-select">
+                <option value="NameOfTeam">New Team
+                    <input type="text" name="CreateNewTeam" class="form-control" value="@ViewBag.CreateNewTeam" />
+                </option>
+                @foreach (var item in Model.NamesTeamsList)
+                {
+                    <option value="@item.TeamId" asp-for="@item.NameOfTeam"></option>
+                }
+            </select>
+        </div> *@
+        <div class="mb-3">
+            <label asp-for="Country"></label>
+            <select asp-for="Country" asp-items="Html.GetEnumSelectList<Countries>()" class="form-select"></select>
+        </div>
+        <button type="submit" class=" btn btn-primary" style="width:150px">Update</button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+</form>

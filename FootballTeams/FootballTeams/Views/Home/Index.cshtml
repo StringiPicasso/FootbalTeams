@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Player>
+
+<div class="container p-1">
+    <div class="row pt-3">
+        <div class="col-4">
+            <h2 class="text-primary">Players</h2>
+        </div>
+        <div class="col-4 text-end">
+            <a asp-controller="Home" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-square-dotted">&nbsp; Create New Player</i>
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped" style="font-size:18px; width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>Team</th>
+                <th>Country</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="15%">@obj.Name</td>
+                    <td width="15%">@obj.Surname</td>
+                    <td width="8%">@obj.Gender</td>
+                    <td width="10%">@obj.DateBirth</td>
+                    <td width="10%">@obj.NameTeam.Name</td>
+                    <td width="10%">@obj.Country</td>
+                    <td>
+                        <div class="w-3 btn-group" role="group">
+                            <a asp-controller="Home" asp-action="Edit" asp-route-id="@obj.Id"
+                               class="btn btn-primary mx-3">
+                                <i class="bi bi-pencil-square">&nbsp; Edit</i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

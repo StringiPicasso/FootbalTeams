@@ -22,6 +22,7 @@ namespace FootballTeams.Models
         public string DateBirth { get; set; }
 
         public int TeamId { get; set; }
+
         [ForeignKey("TeamId")]
         [ValidateNever]
         public TeamName NameTeam { get; set; }

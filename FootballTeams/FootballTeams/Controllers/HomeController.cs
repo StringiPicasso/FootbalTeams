@@ -39,6 +39,15 @@ namespace FootballTeams.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Player player)
         {
+            //if (!ModelState.IsValid || _db.TeamNames.Where(x => x.Id == player.NameTeam.Id).Count() > 0)
+            //{
+            //    _db.Players.Add(player);
+            //    await _db.SaveChangesAsync();
+            //    ViewBag.Teams = new SelectList(_db.TeamNames, "Id", "Name");
+
+            //    return View(player);
+            //}
+
             _db.Players.Add(player);
             await _db.SaveChangesAsync();
 

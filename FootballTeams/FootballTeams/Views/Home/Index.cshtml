@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<Player>
 
-<div class="container p-1">
-    <div class="row pt-3">
-        <div class="col-4">
+<div class="container p-1 row justify-content-center">
+    <div class="row pt-2">
+        <div class="col-6">
             <h2 class="text-primary">Players</h2>
         </div>
-        <div class="col-4 text-end">
+        <div class="col-6 text-end">
             <a asp-controller="Home" asp-action="Create" class="btn btn-primary">
                 <i class="bi bi-plus-square-dotted">&nbsp; Create New Player</i>
             </a>
         </div>
     </div>
 
-    <table class="table table-bordered table-striped" style="font-size:18px; width:100%">
+    <table class="table table-bordered table-striped" style="font-size:18px; width:85%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -30,11 +30,11 @@
                 <tr>
                     <td width="15%">@obj.Name</td>
                     <td width="15%">@obj.Surname</td>
-                    <td width="8%">@obj.Gender</td>
-                    <td width="10%">@obj.DateBirth</td>
+                    <td width="6%">@obj.Gender</td>
+                    <td width="8%">@obj.DateBirth</td>
                     <td width="10%">@obj.NameTeam.Name</td>
-                    <td width="10%">@obj.Country</td>
-                    <td>
+                    <td width="9%">@obj.Country</td>
+                    <td width="6%">
                         <div class="w-3 btn-group" role="group">
                             <a asp-controller="Home" asp-action="Edit" asp-route-id="@obj.Id"
                                class="btn btn-primary mx-3">

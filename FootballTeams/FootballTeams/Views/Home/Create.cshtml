@@ -1,7 +1,7 @@
 ﻿@model FootballTeams.Models.Player
 
-<form method="post">
-    <div class="border p-3 mt-4">
+<form method="post" class="row justify-content-center">
+    <div class="border p-3 mt-4 col-5 ">
         <div class="row rd-2">
             <h2 class="text-primary">Create Category</h2>
             <hr />
@@ -35,11 +35,11 @@
             <select asp-for="TeamId" class="form-control" asp-items="ViewBag.TeamId">
                 <option>Select one...</option>
             </select>
-            <div class="form-group">
+             <div class="form-group" style="display:none">
                 <label asp-for="NameTeam.Name" class="control-label">Or add new team</label>
                 <input asp-for="NameTeam.Name" class="form-control" />
-                <span asp-validation-for="NameTeam.Name" class="text-danger"></span>
-            </div>
+                 <span asp-validation-for="NameTeam.Name" class="text-danger"></span>
+            </div> 
             <span asp-validation-for="TeamId" class="text-danger"></span>
         </div>
         <div class="mb-3">

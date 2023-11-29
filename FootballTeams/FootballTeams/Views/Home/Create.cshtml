@@ -30,12 +30,19 @@
             <span asp-validation-for="DateBirth" class="text-danger"></span>
 
         </div>
-        <div class="mb-3">
+        <div class="mb-3" style="width:85%">
             <label asp-for="TeamId" class="control-label">Select Team</label>
             <select asp-for="TeamId" class="form-control" asp-items="ViewBag.TeamId">
                 <option>Select one...</option>
             </select>
-             <div class="form-group" style="display:none">
+            <div class="col-1 text-end">
+                <button type="button" onclick="" class=" btn btn-primary" style="width:150px">Create</button>
+
+                <a asp-controller="Home" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-square-dotted">&nbsp; Create New Player</i>
+                </a>
+            </div>
+             <div class="form-group">
                 <label asp-for="NameTeam.Name" class="control-label">Or add new team</label>
                 <input asp-for="NameTeam.Name" class="form-control" />
                  <span asp-validation-for="NameTeam.Name" class="text-danger"></span>

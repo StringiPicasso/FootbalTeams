@@ -1,8 +1,11 @@
 ﻿using FootballTeams.Database;
 using FootballTeams.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
 namespace FootballTeams.Controllers
@@ -39,57 +42,87 @@ namespace FootballTeams.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Player player)
         {
-            //if (!ModelState.IsValid || _db.TeamNames.Where(x => x.Id == player.NameTeam.Id).Count() > 0)
-            //{
-            //    _db.Players.Add(player);
-            //    await _db.SaveChangesAsync();
-            //    ViewBag.Teams = new SelectList(_db.TeamNames, "Id", "Name");
+            if (player.NameTeam.Name == null)
+            {
+                Player newPlayer = new Player()
+                {
+                    Id = player.Id,
+                    Name = player.Name,
+                    Surname = player.Surname,
+                    Gender = player.Gender,
+                    DateBirth = player.DateBirth,
+                    TeamId = player.TeamId,
+                    Country = player.Country
+                };
 
-            //    return View(player);
-            //}
+                _db.Players.Add(newPlayer);
+                await _db.SaveChangesAsync();
 
-            _db.Players.Add(player);
-            await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+            if (!ModelState.IsValid)
+            {
+                _db.Players.Add(player);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(player);
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public Task<IActionResult> Edit(int? id)
         {
             if (id == null || id == 0)
             {
-                return NotFound();
+                return Task.FromResult<IActionResult>(NotFound());
             }
 
             var playerFromDb = _db.Players.Find(id);
 
             if (playerFromDb == null)
             {
-                return NotFound();
+                return Task.FromResult<IActionResult>(NotFound());
             }
 
             ViewData["TeamId"] = new SelectList(_db.TeamNames, "Id", "Name");
 
-            return View(playerFromDb);
+            return Task.FromResult<IActionResult>(View(playerFromDb));
         }
 
         [HttpPost]
-        public IActionResult Edit(Player player)
+        public async Task<IActionResult> Edit(Player player)
         {
-            if (!ModelState.IsValid || _db.TeamNames.Where(x => x.Name == player.NameTeam.Name).Count() > 0)
+            if (player.NameTeam.Name == null)
             {
-                _db.TeamNames.Add(player.NameTeam);
-                _db.SaveChanges();
-                ViewBag.Teams = new SelectList(_db.TeamNames, "Id", "Name");
+                Player newPlayer = new Player()
+                {
+                    Id = player.Id,
+                    Name = player.Name,
+                    Surname = player.Surname,
+                    Gender = player.Gender,
+                    DateBirth = player.DateBirth,
+                    TeamId = player.TeamId,
+                    Country = player.Country
+                };
 
-                return View(player);
+                _db.Players.Add(newPlayer);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Index");
             }
 
-            _db.Players.Update(player);
-            _db.SaveChanges();
+            if (!ModelState.IsValid)
+            {
+                _db.Players.Add(player);
+                await _db.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            return View(player);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
